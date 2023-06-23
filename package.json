@@ -1,0 +1,14 @@
+{
+  "name": "netlify-fx-edge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@optimizely/optimizely-sdk": "^4.9.4"
+  }
+}
