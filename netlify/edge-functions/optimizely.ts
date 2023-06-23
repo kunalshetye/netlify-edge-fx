@@ -10,7 +10,7 @@ export default async function handler(req: Request, {cookies}: Context) {
 
   const sdkKey = Netlify.env.get("OPTIMIZELY_SDK_KEY");
   const flagKey = Netlify.env.get("FLAG_KEY") || "discount";
-  
+
   console.log(`sdkKey: ${sdkKey} - flagKey: ${flagKey}`);
 
   // fetch datafile from optimizely CDN and cache it with cloudflare for the given number of seconds
@@ -52,18 +52,16 @@ export default async function handler(req: Request, {cookies}: Context) {
 
   // --- For a single flag --- //
   const decision = optimizelyUserContext.decide(flagKey);
+
   let message = "";
+  const id = decision.userContext.getUserId();
 
   if (decision.enabled) {
-    message = `The Flag "${
-      decision.flagKey
-    }" was Enabled for the user "${decision.userContext.getUserId()}"`;
+    message = `The Flag "${decision.flagKey}" was Enabled for the user "${id}"`;
+    message += `\n\n\nVariant: ${decision.variationKey}, Variables: ${JSON.stringify(decision.variables || {})}`;
   } else {
-    message = `The Flag "${
-      decision.flagKey
-    }" was Not Enabled for the user "${decision.userContext.getUserId()}"`;
+    message = `The Flag "${decision.flagKey}" was Not Enabled for the user "${id}"`;
   }
-
   console.log(message);
   return new Response(message);
 }
@@ -95,7 +93,7 @@ export async function getDatafile(sdkKey, ttl) {
   const dataFileRequest = new Request(
     `https://cdn.optimizely.com/datafiles/${sdkKey}.json`
   );
-  
+
   const fetchedDatafile = await fetch(dataFileRequest, {
     backend: BACKEND_CDN,
   });
