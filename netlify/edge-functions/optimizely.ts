@@ -3,7 +3,7 @@ import type { Config, Context } from "https://edge.netlify.com/";
 import {
   enums as OptimizelyEnums,
   createInstance
-} from "npm:@optimizely/optimizely-sdk";
+} from "https://esm.sh/@optimizely/optimizely-sdk";
 
 
 export default async function handler(req: Request, {cookies}: Context) {
