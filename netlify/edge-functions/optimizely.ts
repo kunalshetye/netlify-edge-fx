@@ -3,15 +3,15 @@ import type { Config, Context } from "https://edge.netlify.com/";
 import {
   enums as OptimizelyEnums,
   createInstance
-} from "npm:@optimizely/optimizely-sdk/dist/optimizely.lite.min.js";
+} from "npm:@optimizely/optimizely-sdk";
 
 
 export default async function handler(req: Request, {cookies}: Context) {
 
   const sdkKey = Netlify.env.get("OPTIMIZELY_SDK_KEY");
   const flagKey = Netlify.env.get("FLAG_KEY") || "discount";
-
-  console.log(sdkKey);
+  
+  console.log(`sdkKey: ${sdkKey} - flagKey: ${flagKey}`);
 
   // fetch datafile from optimizely CDN and cache it with cloudflare for the given number of seconds
   const datafile = await getDatafile(sdkKey, 600);
