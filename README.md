@@ -5,4 +5,4 @@
 | Variable               | Description                                |
 |------------------------|--------------------------------------------|
 | **OPTIMIZELY_SDK_KEY** | The Optimizely SDK Key to use              |
-| **FLAG_KEY**           | The Flag to be evaluated for a random user |
+| **FLAG_KEY**           | The Flag Key to be evaluated for the user  |
